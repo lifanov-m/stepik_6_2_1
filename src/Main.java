@@ -25,8 +25,8 @@ public class Main {
         result = symmetricDifference_v2(set1, set2);
         System.out.println( "result for v2:  " + result );
 
-        result = symmetricDifference_v2(set1, set2);
-        System.out.println( "result for v2:  " + result );
+        result = symmetricDifference_v3(set1, set2);
+        System.out.println( "result for v3:  " + result );
     }
 
     public static <T> Set<T> symmetricDifference_v1(Set<? extends T> set1, Set<? extends T> set2) {
@@ -51,7 +51,33 @@ public class Main {
         return result;
     }
 
+
+
+
     public static <T> Set<T> symmetricDifference_v2(Set<? extends T> set1, Set<? extends T> set2) {
+
+        Set<T> result = new HashSet<>();
+
+        Iterator<? extends T> iterator = set1.iterator();
+
+
+        while (iterator.hasNext()) {
+            if(! set2.contains(iterator.next())) {
+                result.add(iterator.next());
+            }
+        }
+
+        iterator = set2.iterator();
+        while (iterator.hasNext()) {
+            if(! set1.contains(iterator.next())) {
+                result.add(iterator.next());
+            }
+        }
+
+        return result;
+    }
+
+    public static <T> Set<T> symmetricDifference_v3(Set<? extends T> set1, Set<? extends T> set2) {
 
         Set<T> set1_copy = new HashSet<>(set1);
         Set<T> set2_copy = new HashSet<>(set2);
@@ -62,29 +88,5 @@ public class Main {
         set1_copy.removeAll(intersection);
 
         return set1_copy;
-    }
-
-
-    public static <T> Set<T> symmetricDifference_v3(Set<? extends T> set1, Set<? extends T> set2) {
-
-        Set<T> result = new LinkedHashSet<>();
-        /*
-        Iterator<T> iterator = (Iterator<T>) set1.iterator();
-
-        while (iterator.hasNext()) {
-            if(! set2.contains(iterator.next())) {
-                result.add(iterator.next());
-            }
-        }
-
-        for (T el:set2
-        ) {
-            if(! set1.contains(el)) {
-                result.add(el);
-            }
-        }
-
-        */
-        return result;
     }
 }
