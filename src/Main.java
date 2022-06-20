@@ -24,6 +24,9 @@ public class Main {
 
         result = symmetricDifference_v2(set1, set2);
         System.out.println( "result for v2:  " + result );
+
+        result = symmetricDifference_v2(set1, set2);
+        System.out.println( "result for v2:  " + result );
     }
 
     public static <T> Set<T> symmetricDifference_v1(Set<? extends T> set1, Set<? extends T> set2) {
@@ -50,15 +53,15 @@ public class Main {
 
     public static <T> Set<T> symmetricDifference_v2(Set<? extends T> set1, Set<? extends T> set2) {
 
-        Set<T> result = new LinkedHashSet<>();
+        Set<T> set1_copy = new HashSet<>(set1);
+        Set<T> set2_copy = new HashSet<>(set2);
+        Set<T> intersection = new HashSet<>(set1);
 
-        Set<? extends T> set1_copy = new HashSet<>(set1);
-        Set<? extends T> set2_copy = new HashSet<>(set2);
+        intersection.retainAll(set2_copy);
+        set1_copy.addAll(set2_copy);
+        set1_copy.removeAll(intersection);
 
-        Set<? extends T> sum = set1_copy.addAll(set2_copy);
-
-
-        return result;
+        return set1_copy;
     }
 
 
