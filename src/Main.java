@@ -51,9 +51,6 @@ public class Main {
         return result;
     }
 
-
-
-
     public static <T> Set<T> symmetricDifference_v2(Set<? extends T> set1, Set<? extends T> set2) {
 
         Set<T> result = new HashSet<>();
@@ -62,15 +59,17 @@ public class Main {
 
 
         while (iterator.hasNext()) {
-            if(! set2.contains(iterator.next())) {
-                result.add(iterator.next());
+            T el = iterator.next();
+            if(! set2.contains(el)) {
+                result.add(el);
             }
         }
 
         iterator = set2.iterator();
         while (iterator.hasNext()) {
-            if(! set1.contains(iterator.next())) {
-                result.add(iterator.next());
+            T el = iterator.next();
+            if(! set1.contains(el)) {
+                result.add(el);
             }
         }
 
