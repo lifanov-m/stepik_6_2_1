@@ -57,26 +57,37 @@ public class SymmetricDifferenceTest {
             return;
         }
 
+        long maxWorkTime = 0;
         long startTime =  System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             SymmetricDifference.symmetricDifference_v1(set1, set2);
         }
-        long stopTime =  System.nanoTime();
-        System.out.println( "work time for v1:  " + (stopTime-startTime) );
+        long workTimeV1 =  System.nanoTime() - startTime;
+        maxWorkTime = Math.max(maxWorkTime, workTimeV1);
 
         startTime =  System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             SymmetricDifference.symmetricDifference_v2(set1, set2);
         }
-        stopTime =  System.nanoTime();
-        System.out.println( "work time for v2:  " + (stopTime-startTime) );
+        long workTimeV2 =  System.nanoTime() - startTime;
+        maxWorkTime = Math.max(maxWorkTime, workTimeV2);
+
 
         startTime =  System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             SymmetricDifference.symmetricDifference_v3(set1, set2);
         }
-        stopTime =  System.nanoTime();
-        System.out.println( "work time for v3:  " + (stopTime-startTime) );
+        long workTimeV3 =  System.nanoTime() - startTime;
+        maxWorkTime = Math.max(maxWorkTime, workTimeV3);
+
+        float maxWorkTimeFloat = (float)maxWorkTime;
+        float percentage1 = (float)workTimeV1 / maxWorkTimeFloat * 100f;
+        float percentage2 = (float)workTimeV2 / maxWorkTimeFloat * 100f;
+        float percentage3 = (float)workTimeV3 / maxWorkTimeFloat * 100f;
+
+        System.out.println( "work time for v1:  " + workTimeV1 + "  (" + (int)percentage1 + " %)" );
+        System.out.println( "work time for v2:  " + workTimeV2 + "  (" + (int)percentage2 + " %)"  );
+        System.out.println( "work time for v3:  " + workTimeV3 + "  (" + (int)percentage3 + " %)"  );
     }
 
     public void benchmarkIntegers(int iterations) {
